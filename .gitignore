@@ -1,0 +1,25 @@
+# Build output and downloaded runtime cache
+**/bin/
+**/obj/
+/artifacts/*
+!/artifacts/SDRSharp.DCRDecoder-v*-win-x64.zip
+/dist/
+
+# Local SDK and archived development material
+/SDK/
+/old/
+
+# Local runtime and Python cache
+/.dotnet-home/
+/.venv/
+**/__pycache__/
+*.pyc
+
+# IDE and local configuration
+.vs/
+.idea/
+*.user
+*.suo
+.env
+.env.*
+*.log

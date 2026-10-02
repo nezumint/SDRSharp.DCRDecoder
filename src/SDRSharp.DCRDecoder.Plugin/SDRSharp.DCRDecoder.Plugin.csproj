@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <PlatformTarget>x64</PlatformTarget>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>SDRSharp.DCRDecoder</AssemblyName>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <SdrSharpSdkPath Condition="'$(SdrSharpSdkPath)' == ''">$(MSBuildThisFileDirectory)..\..\SDK\sdrplugins\lib</SdrSharpSdkPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../SDRSharp.DCRDecoder.Core/SDRSharp.DCRDecoder.Core.csproj" />
+    <ProjectReference Include="../SDRSharp.DCRDecoder.Vocoder/SDRSharp.DCRDecoder.Vocoder.csproj" />
+    <Reference Include="SDRSharp.Common"><HintPath>$(SdrSharpSdkPath)/SDRSharp.Common.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="SDRSharp.Radio"><HintPath>$(SdrSharpSdkPath)/SDRSharp.Radio.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="SDRSharp.PanView"><HintPath>$(SdrSharpSdkPath)/SDRSharp.PanView.dll</HintPath><Private>false</Private></Reference>
+  </ItemGroup>
+  <ItemGroup><None Include="../../tools/dcr_vocoder_host.py" Link="dcr_vocoder_host.py" CopyToOutputDirectory="PreserveNewest" /></ItemGroup>
+</Project>

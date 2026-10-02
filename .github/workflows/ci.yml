@@ -1,0 +1,21 @@
+name: Build and self-test
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  self-test:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0.x
+      - name: Build core, vocoder and tests
+        run: dotnet build tests/SDRSharp.DCRDecoder.Tests -c Release
+      - name: Run tests without private recordings or SDRSharp SDK
+        run: dotnet run --project tests/SDRSharp.DCRDecoder.Tests -c Release --no-build
