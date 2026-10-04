@@ -6,14 +6,30 @@ SDRSharp revision 1921 **.NET 9 x64版**向けのDCRデコーダです。受信�
 
 Python 3.14.8 x64の組み込み版とNumPy 2.5.3を同梱します。利用者がPythonをインストールしたり、パスを設定したりする必要はありません。音声エンジン `blip25-vocoder==1.0.0` 本体は同梱せず、利用者が配布元から取得したWindows x64版wheelを取り込む構成です。エンジン未配置でもIQと制御情報の復号表示は継続します。
 
-## インストールと音声の使い方
+## インストール
 
-1. **SDRSharpを終了**します。
-2. 配布ZIPの中身を `sdrsharp-x64/Plugins/` にコピーします。DLL全3本、helper、依存情報だけでなく、**DcrRuntimeフォルダー全体**とライセンス文書も必要です。
-3. [配布元のファイル一覧](https://pypi.org/project/blip25-vocoder/1.0.0/#files)から **blip25_vocoder-1.0.0-cp39-abi3-win_amd64.whl** を取得します。ソースのtar.gz、Linux版、macOS版は使用できません。開発元のライセンスと特許に関する説明も確認してください。
-4. `SDRSharp.dotnet9.exe`を起動し、DCR Decoderの **Import voice engine (.whl)…** を押して取得したファイルを選びます。**Download supported voice engine**リンクから配布元を開くこともできます。
-5. **Voice engine: ready**になったら **Enable DCR audio through SDR#**をチェックします。標準秘話の場合だけ **Enable standard privacy decode** をチェックし、既知コードを入力します。コードは数字をそのまま表示します。
-6. **Apply audio settings**を押します。出力先と音量はSDRSharp側で選び、SDRSharpのミュートを解除してください。
+### 1. SDRSharpを準備する
+
+SDRSharp revision 1921 **.NET 9 x64版**をインストールし、`SDRSharp.dotnet9.exe`を起動してください。使用する受信機を選び、通常の受信と音声出力が動作する状態にしてから、**SDRSharpを終了**します。
+
+### 2. 配布ZIPをダウンロードして展開する
+
+このリポジトリの [artifactsフォルダー](https://github.com/nezumint/SDRSharp.DCRDecoder/tree/main/artifacts)を開き、**SDRSharp.DCRDecoder-v1.0.0-win-x64.zip** を選びます。ファイル画面のダウンロードボタンからZIPを保存し、Windowsの「すべて展開」で展開してください。
+
+### 3. Pluginsフォルダーへコピーする
+
+展開したZIP内の**すべてのファイルとフォルダー**を、SDRSharpのインストール先にある `Plugins/` フォルダーへコピーします。DLLだけでなく、**DcrRuntimeフォルダー全体**とライセンス文書も必要です。フォルダー構成を保持し、`Plugins/SDRSharp.DCRDecoder.dll` と `Plugins/DcrRuntime/` が存在する状態にしてください。
+
+### 4. プラグインのウィンドウを表示する
+
+`SDRSharp.dotnet9.exe`を起動し、左上の **「三」 → 「Plugins」 → 「Digital:SDRDecoder」** を選択して、デコーダのウィンドウを表示します。本プラグインの表示名は **DCR Decoder** です。メニューに「Digital:DCR Decoder」と表示される場合は、その項目を選択してください。
+
+## 音声エンジンの取り込みと再生
+
+1. [配布元のファイル一覧](https://pypi.org/project/blip25-vocoder/1.0.0/#files)から **blip25_vocoder-1.0.0-cp39-abi3-win_amd64.whl** を取得します。ソースのtar.gz、Linux版、macOS版は使用できません。開発元のライセンスと特許に関する説明も確認してください。
+2. DCR Decoderの **Import voice engine (.whl)…** を押して取得したファイルを選びます。**Download supported voice engine**リンクから配布元を開くこともできます。
+3. **Voice engine: ready**になったら **Enable DCR audio through SDR#**をチェックします。標準秘話の場合だけ **Enable standard privacy decode** をチェックし、既知コードを入力します。コードは数字をそのまま表示します。
+4. **Apply audio settings**を押します。出力先と音量はSDRSharp側で選び、SDRSharpのミュートを解除してください。
 
 取り込みはオフラインで行い、自動ダウンロードやpipの実行は行いません。既知のSHA-256に一致する上記ファイルだけを受け付け、展開後に実際の音声復号を試験してから有効にします。エンジンは `Plugins/DcrRuntime/engines/blip25-vocoder-1.0.0/` に保存され、SDRSharp再起動後も再取り込みは不要です。更新時はこのフォルダーを保持してください。取り込み先への書き込み権限が必要です。
 
